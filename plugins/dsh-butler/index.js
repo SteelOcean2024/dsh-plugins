@@ -100,6 +100,15 @@ function collectTaskBoard(home) {
   }));
 }
 
+// 把 ISO 时间串按本地时区显示。存储里只有 scheduledAt（UTC），直接显示会差 8 小时。
+function fmtIsoLocal(s) {
+  if (typeof s !== "string" || s === "") return null;
+  const d = new Date(s);
+  if (Number.isNaN(d.getTime())) return s;
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
 function collectSchedules(home) {
   const s = readJson(join(home, "storages", "schedule.json"));
   if (!s) return null;
@@ -111,7 +120,7 @@ function collectSchedules(home) {
     return {
       title: rec.title || "(untitled)",
       status: v?.status || "unknown",
-      next: rec.scheduledAtLocal || rec.scheduledAt || null,
+      next: fmtIsoLocal(rec.scheduledAtLocal) ?? fmtIsoLocal(rec.scheduledAt),
     };
   });
 }
