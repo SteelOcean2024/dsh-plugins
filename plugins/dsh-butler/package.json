@@ -1,0 +1,64 @@
+{
+  "name": "@steelocean2024/dsh-butler",
+  "version": "1.0.0",
+  "description": "DSH 总管家：跨工作区总览所有会话/任务/定时任务的运行状态，并在会话跑完时主动推送微信提醒。A butler for DeepSeek Harness: cross-workspace status overview plus proactive WeChat notifications when a session finishes a turn.",
+  "type": "module",
+  "license": "MIT",
+  "author": "SteelOcean2024",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteelOcean2024/dsh-plugins.git",
+    "directory": "plugins/dsh-butler"
+  },
+  "homepage": "https://github.com/SteelOcean2024/dsh-plugins/tree/main/plugins/dsh-butler#readme",
+  "bugs": {
+    "url": "https://github.com/SteelOcean2024/dsh-plugins/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "dsh-bundle",
+    "butler",
+    "agent-preset",
+    "session-monitor",
+    "notification",
+    "proactive-delivery",
+    "wechat",
+    "status-overview",
+    "管家",
+    "会话监控",
+    "微信推送"
+  ],
+  "engines": {
+    "node": ">=22.19"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    ".npmignore"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dsh": "0.2.2-rc.1",
+      "dshReleases": {
+        "0.2.2-rc.1+": "compatible"
+      }
+    }
+  }
+}

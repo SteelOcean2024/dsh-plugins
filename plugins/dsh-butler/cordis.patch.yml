@@ -1,0 +1,93 @@
+# dsh-butler：一个陪伴插件 bundle
+# 1) 宿主插件 dsh-butler —— 注册「全局状态总览」工具
+# 2) 管家预设 butler —— 管家人设 + 完整工具集
+- insert:
+    - id: dsh-butler
+      name: '@steelocean2024/dsh-butler'
+      config: {}
+- insert:
+    - id: preset-butler
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: butler
+        name: '管家'
+        description: 'DSH 总管家：跨工作区总览会话/任务/定时任务状态，自然语言派活与汇报'
+        order: 50
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: |
+                你是运行在 DeepSeek Harness（DSH）里的「总管家」，通过微信随时为用户服务。你的职责是跨工作区总揽全局：查询所有工作区、所有会话、任务看板、定时任务的运行状态，并能派活、催进度、汇报结果。回答要主动、简洁、用中文。
+
+                ## 你能干什么（用户问「你有哪些功能」时，就复述这份清单）
+                【被动 · 用户问，你答】
+                1. 看所有工作区：用 ds_butler_status 工具，列出所有工作区及各自会话数
+                2. 看任务状态：哪个会话最近跑完/报错/超限、哪个任务卡在 running/todo/failed
+                3. 看定时任务：列出所有定时任务及下次运行时间
+                4. 看任务看板：todo / running / done / failed 各有哪些
+                5. 功能自述：把这份清单复述给用户
+                6. 自然语言派活：在指定工作区/会话里执行具体任务
+
+                【主动 · 系统推，不用用户问】
+                7. 会话跑完时提醒，并说清是整个任务完成、还是某个子智能体完成但还有别的在跑、还是报错
+                8. 会话报错或上下文超限时提醒
+
+                ## 硬要求
+                - 回答先给结论，再给明细；能用表格就用表格
+                - 涉及「哪个任务没跑完」时，必须用 ds_butler_status 取真实数据，不凭空编
+                - 涉及改文件、删东西、重启等不可逆操作，先跟用户确认
+                - 用户在微信里打字，回复尽量控制在 1800 字以内（微信单条上限）
+          - id: agent-instructions
+            name: '@deepseek-ai/dsh-agent-instructions'
+            config:
+              maxBytes: 65536
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+            disabled: !!js process.platform === 'win32'
+          - id: tool-pwsh
+            name: '@deepseek-ai/dsh-tool-pwsh'
+            disabled: !!js process.platform !== 'win32'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+            config:
+              applyPatch: false
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+          - id: tool-jobs
+            name: '@deepseek-ai/dsh-tool-jobs'
+          - id: tool-schedule
+            name: '@deepseek-ai/dsh-tool-schedule'
+          - id: command-goal
+            name: '@deepseek-ai/dsh-command-goal'
+          - id: tool-goal
+            name: '@deepseek-ai/dsh-tool-goal'
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: true
+          - id: tool-web
+            name: '@deepseek-ai/dsh-tool-web'
+            config:
+              fetch: true
+              searchTimeoutMs: 60000
+          - id: present
+            name: '@deepseek-ai/dsh-tool-present'
+          - id: tool-office
+            name: '@deepseek-ai/dsh-tool-office'
+          - id: tool-subagent
+            name: '@deepseek-ai/dsh-tool-subagent'
+            config:
+              provider: spawn
+              toolName: subagent
+              modelSelection: true
+              modelDiscovery: true
+          - id: tool-subagent-fork
+            name: '@deepseek-ai/dsh-tool-subagent'
+            config:
+              provider: fork
+              toolName: subagent_fork
+          - id: tool-ask-user
+            name: '@deepseek-ai/dsh-tool-ask-user'

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DSH butler",
+    "description": "Global overview of all workspaces, sessions, task board and schedules, plus a butler agent preset that answers status queries and dispatches work in natural language."
+  }
+}
