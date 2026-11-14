@@ -1,6 +1,6 @@
 {
   "name": "@steelocean2024/dsh-butler",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "DSH 总管家：跨工作区总览所有会话/任务/定时任务的运行状态，并在会话跑完时主动推送微信提醒。A butler for DeepSeek Harness: cross-workspace status overview plus proactive WeChat notifications when a session finishes a turn.",
   "type": "module",
   "license": "MIT",
