@@ -1,10 +1,19 @@
-# dsh-butler：一个陪伴插件 bundle
-# 1) 宿主插件 dsh-butler —— 注册「全局状态总览」工具
-# 2) 管家预设 butler —— 管家人设 + 完整工具集
+# dsh-butler：自带 IM 通道的完整插件
+# 1) xmanrui-dsh-im —— 全部 IM 渠道（微信/飞书/钉钉/企微/QQ/Slack/Telegram/Discord/
+#    WhatsApp/iMessage/Matrix/邮件/AI Office）。它作为本包的依赖安装，
+#    所以用户只需安装 dsh-butler 一个包，不必再单独安装 @xmanrui/dsh-im。
+#    ⚠️ 本行与 @xmanrui/dsh-im 自己的 bundle 补丁内容相同，两者不能同时生效，
+#       否则同一个插件会被注册两次（消息会被处理两遍）。切换时必须移除单独安装的
+#       @xmanrui/dsh-im bundle，只保留本包。
+- insert:
+    - id: xmanrui-dsh-im
+      name: '@xmanrui/dsh-im'
+# 2) 宿主插件 dsh-butler —— 注册「全局状态总览」工具
 - insert:
     - id: dsh-butler
       name: '@steelocean2024/dsh-butler'
       config: {}
+# 3) 管家预设 butler —— 管家人设 + 完整工具集
 - insert:
     - id: preset-butler
       name: '@deepseek-ai/dsh-agent-preset'

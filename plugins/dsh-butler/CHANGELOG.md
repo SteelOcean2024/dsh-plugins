@@ -2,6 +2,28 @@
 
 本项目遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与[语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [Unreleased]
+
+### 变更
+
+- **本包现在自带全部 IM 渠道**：把 `@xmanrui/dsh-im` 声明为本包依赖，并在本包的补丁里插入它的通道行。
+  原来需要分别安装「`@xmanrui/dsh-im` + `@steelocean2024/dsh-butler`」两个包，现在**只装本包**即可，
+  覆盖微信 / 飞书 / 钉钉 / 企微 / QQ / Slack / Telegram / Discord / WhatsApp / iMessage / Matrix / 邮件 / AI Office。
+
+### ⚠️ 迁移注意（从 v1 升级）
+
+- **不要同时启用 `@xmanrui/dsh-im` 自己的 bundle**：本包补丁里的通道行与它的 bundle 补丁内容相同，
+  两者同时生效会让同一个插件被注册两次（消息会被处理两遍）。
+- 正确做法是**停用**而不是**移除**它：
+
+  ```
+  plugin_manager  action=set_bundle  target=@xmanrui/dsh-im  enabled=false
+  ```
+
+  停用后它的补丁不再生效，但包仍留在 `node_modules` 里（本包的补丁行要解析到它）。
+  若用 `remove_bundle` 把依赖也删掉，本包作为本地目录链接安装时 pnpm 不会补装它的依赖，
+  通道行就会解析失败。
+
 ## [1.0.0] - 2026-11-14
 
 首次发布。

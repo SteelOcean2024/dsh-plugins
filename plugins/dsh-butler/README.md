@@ -95,6 +95,20 @@ DeepSeek Harness 可以同时开很多会话干活。问题是：
 
 **插件本身零依赖**：只用 Node 内置模块，不 import 任何 `@deepseek-ai/*` 包。
 
+### 本包自带 IM 通道
+
+本包把 `@xmanrui/dsh-im` 声明为依赖，并在自己的补丁里插入它的通道行——**装本包一个就够**，
+覆盖微信 / 飞书 / 钉钉 / 企微 / QQ / Slack / Telegram / Discord / WhatsApp / iMessage / Matrix / 邮件 / AI Office。
+
+> ⚠️ **不要同时启用 `@xmanrui/dsh-im` 自己的 bundle**：两者的通道行内容相同，同时生效会让同一个插件
+> 注册两次（消息被处理两遍）。如果你之前单独装过它，请**停用**（不是移除）：
+>
+> ```
+> plugin_manager  action=set_bundle  target=@xmanrui/dsh-im  enabled=false
+> ```
+>
+> 停用后它的补丁不再生效，但包仍留在 `node_modules` 里供本包解析。
+
 ### 从 GitHub 安装
 
 ```sh

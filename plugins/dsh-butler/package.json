@@ -33,6 +33,9 @@
   "engines": {
     "node": ">=22.19"
   },
+  "dependencies": {
+    "@xmanrui/dsh-im": "5.10.0"
+  },
   "exports": {
     ".": "./index.js",
     "./package.json": "./package.json",
