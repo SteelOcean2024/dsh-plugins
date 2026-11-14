@@ -5,3 +5,7 @@ node_modules/
 Thumbs.db
 .idea/
 .vscode/
+
+# 上游参考实现只读副本（分叉用，不提交）
+.upstream/
+commitmsg.tmp

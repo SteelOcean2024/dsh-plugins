@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "管家 (dsh-butler)",
+    "description": "DSH 总管家：跨工作区总览所有会话、任务看板、定时任务的运行状态，会话跑完一轮主动推送提醒；并自带 13 个 IM 渠道（微信/飞书/钉钉/企微/QQ/Slack/Telegram/Discord/WhatsApp/iMessage/Matrix/邮件/AI Office）。"
+  }
+}
